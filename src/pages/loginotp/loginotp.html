@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Submit OTP</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<ion-list>
+		<ion-item>
+			<ion-label floating>Your Name</ion-label>
+			<ion-input type="text" [(ngModel)]="fullname"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label floating>OTP</ion-label>
+			<ion-input type="text" [(ngModel)]="OTP"></ion-input>
+		</ion-item>
+		<ion-item>
+			<button ion-button (click)="Submit();">Submit</button>
+			<button ion-button (click)="Resend();">Resend OTP</button>
+		</ion-item>
+	</ion-list>
+</ion-content>

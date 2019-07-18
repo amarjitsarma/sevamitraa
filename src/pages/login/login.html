@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color='dark'>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="login_bg">
+	<ion-list class="login_form">
+		<ion-item class="transparent">
+			<ion-label floating class="mobile">Mobile No</ion-label>
+			<ion-input class="mobile_no" type="text" [(ngModel)]="MobileNo"></ion-input>
+		</ion-item>
+		<ion-item class="transparent">
+			<button ion-button full (click)="SendOTP();">Send OTP</button>
+			<button ion-button color="primary" (click)="FBLogin();" full>Login with&nbsp;&nbsp;&nbsp;<ion-icon name="logo-facebook"></ion-icon></button>
+		</ion-item>
+		<!--ion-item>
+			<button ion-button color="primary" (click)="GoogleLogin();" full>Login with&nbsp;&nbsp;&nbsp;<ion-icon name="logo-googleplus"></ion-icon></button>
+		</ion-item-->
+	</ion-list>
+	<p [innerHTML]="error"></p>
+</ion-content>

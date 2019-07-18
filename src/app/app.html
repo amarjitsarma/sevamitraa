@@ -1,0 +1,37 @@
+<ion-menu [content]="content" [enabled]="false">
+  <ion-header>
+    <ion-toolbar color='primary'>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+		<ion-item *ngIf="Login!='no'">
+			<ion-avatar item-start>
+				<img src="/assets/imgs/profile.jpg">
+			</ion-avatar>
+			<h2>{{FullName}}</h2>
+			<p>{{EmailID}}</p>
+			<p>{{MobileNo}}</p>
+		</ion-item>
+		<ion-item *ngIf="Login=='no'">
+			<button ion-button full color='primary' (click)="GotoLogin();">Click to Login</button>
+		</ion-item>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon name="{{p.icon}}"></ion-icon>&nbsp;{{p.title}}
+      </button>
+	  <button menuClose ion-item>
+		Terms & Conditions
+      </button>
+	  <button menuClose ion-item>
+		Privacy Policy
+      </button>
+    </ion-list>
+
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

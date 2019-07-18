@@ -1,0 +1,32 @@
+<ion-header>
+
+<ion-navbar color="dark">
+    <ion-title>Login</ion-title>
+    <ion-buttons>
+    <button ion-button (click)="closeModal()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+<ion-list>
+	<ion-item>
+    <ion-label floating>Your Name</ion-label>
+    <ion-input type="text" [(ngModel)]="fullname"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Mobile No</ion-label>
+    <ion-input type="text" [(ngModel)]="MobileNo"></ion-input>
+  </ion-item>
+  <button ion-button full color='primary' (click)="SendOTP();">Send OTP</button>
+  <ion-item>
+    <ion-label floating>OTP</ion-label>
+    <ion-input type="text" [(ngModel)]="OTP"></ion-input>
+  </ion-item>
+  <ion-item>
+	<button ion-button full calm (click)="Submit()">Verify</button>
+	<button ion-button full calm (click)="Resend()">Resend OTP</button>
+  </ion-item>
+</ion-list>
+</ion-content>

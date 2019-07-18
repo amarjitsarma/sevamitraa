@@ -1,0 +1,68 @@
+
+<ion-content>
+	<ion-list>
+		<ion-item text-center>
+			<ion-icon name="pin"></ion-icon> Guwahati
+		</ion-item>
+	</ion-list>
+	<ion-searchbar (click)="GotoSearch();"></ion-searchbar>
+	<ion-list>
+		<ion-item *ngFor="let item of items; let i=index" (click)="Book(item);" class="searchItem">
+			{{ item }}
+		</ion-item>
+		
+	</ion-list>
+	<h2 text-center *ngIf="Coupons.length!=0">Latest  Coupon & Offer</h2>
+	<ion-list *ngIf="Coupons.length!=0">
+		<ion-item *ngFor="let Coupon of Coupons" class="card-background-page">
+			<ion-card (click)="GetProducts(Coupon.id);">
+				<img src="https://www.sevamitraa.com/{{Coupon.image}}"/>
+			</ion-card>
+		</ion-item>
+	</ion-list>
+	<div style="margin-bottom:10px;">
+	<ion-card *ngFor="let Category of SubCategories" (click)="BookSub(Category.id,Category.category_id);" class="Half-Card">
+		<ion-item class="CtaegoryBack">
+			<img src="https://www.sevamitraa.com/{{Category.icon}}"/>
+			<h2>{{Category.title}}</h2>
+		</ion-item>
+		
+	</ion-card>
+	<button ion-button icon-only class="middle_button" (click)="ShowAll(1);" *ngIf="showall==0">
+		<ion-icon name="arrow-round-down"></ion-icon>
+	</button>
+	<button ion-button icon-only class="middle_button" (click)="ShowAll(0);" *ngIf="showall==1">
+		<ion-icon name="arrow-round-up"></ion-icon>
+	</button>
+	</div>
+	<ion-list *ngIf="Promotions.length!=0">
+		<ion-item *ngFor="let Promotion of Promotions" class="card-background-page">
+			<ion-card (click)="BookSub(Promotion.sub_category_id,Promotion.category_id);" >
+				<img src="https://www.sevamitraa.com/{{Promotion.promotional_image}}"/>
+				<!--div class="card-title">São Paulo</div-->
+				<div class="card-subtitle" [innerHTML]="Promotion.promotional_note"></div>
+			</ion-card>
+		</ion-item>
+	</ion-list>
+	<!--ion-slides *ngIf="Testimonials.length!=0" autoplay="2000" loop="true" speed="500" pager="true">
+		<ion-slide *ngFor="let Testimonial of Testimonials" class="card-background-page">
+			<ion-card (click)="ViewTestimonial(Testimonial.id);" >
+				<img src="https://www.sevamitraa.com/{{Testimonial.image}}"/>
+				<div class="card-title">{{Testimonial.name}}</div>
+				<div class="card-subtitle" style="background:rgba(0,0,0,0.5);">{{Testimonial.designation}}<br/>
+				<p style="background:rgba(255,255,255,0.8);">{{Testimonial.message}}</p>
+				</div>
+			</ion-card>
+		</ion-slide>
+	</ion-slides-->
+	<ion-card *ngFor="let Category of Categories" (click)="Book(Category.id);">
+		<ion-item class="CtaegoryBack">
+			<ion-avatar item-end>
+				<img src="https://www.sevamitraa.com/{{Category.icon}}"/>
+			</ion-avatar>
+			<h2>{{Category.title}}</h2>
+			<p>{{Category.description}}</p>
+		</ion-item>
+	</ion-card>
+	
+</ion-content>

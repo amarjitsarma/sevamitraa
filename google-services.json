@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "859791403054",
+    "firebase_url": "https://sevamitraa-8873a.firebaseio.com",
+    "project_id": "sevamitraa-8873a",
+    "storage_bucket": "sevamitraa-8873a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859791403054:android:a5754fc71a368e97",
+        "android_client_info": {
+          "package_name": "com.ionic.sevamitraa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859791403054-qltqvce1m9qukvegjecjr85fh6l8h5cf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAneE_DVgHz-zFOnE6C-zGiEIRnkwgYcUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859791403054:android:91601f456e222845",
+        "android_client_info": {
+          "package_name": "in.sevamitraa.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859791403054-qltqvce1m9qukvegjecjr85fh6l8h5cf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAneE_DVgHz-zFOnE6C-zGiEIRnkwgYcUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

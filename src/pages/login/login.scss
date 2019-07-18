@@ -1,0 +1,27 @@
+page-login {
+	.login_bg{
+		background: url(../assets/imgs/login_bg.jpg);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: right;
+	}
+	.transparent{
+		background:transparent;
+	}
+	.login_form{
+		border-radius: 12px;
+		position: absolute;
+		bottom: 0px;
+		width: 90%;
+		background: rgba(255,255,255,0.8);
+	}
+	.mobile_no{
+		background: #fff;
+		padding: 0px 10px;
+		border: #000 1px solid;
+		border-radius: 40px;
+	}
+	.mobile{
+		margin-left:17px !important;
+	}
+}

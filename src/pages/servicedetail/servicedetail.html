@@ -1,0 +1,75 @@
+<!--
+  Generated template for the ServicedetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Service Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<h2 text-center *ngIf="Coupons.length!=0">Latest  Coupon & Offer</h2>
+<ion-slides *ngIf="Coupons.length!=0" autoplay="2000" loop="true" speed="500" pager="true" >
+		<ion-slide *ngFor="let Coupon of Coupons">
+			<img src="https://www.sevamitraa.com/{{Coupon.image}}"/>
+		</ion-slide>
+</ion-slides>
+	<ion-card *ngIf="SubCategory!=null">
+		<img src="https://www.sevamitraa.com/{{SubCategory.image}}" *ngIf="SubCategory.image!=''"/>
+  <ion-card-content>
+    
+		<ion-item>
+		<ion-avatar item-start>
+      <img src="https://www.sevamitraa.com/{{SubCategory.icon}}"/>
+    </ion-avatar>
+	<ion-card-title>
+      {{SubCategory.title}}
+	  </ion-card-title>
+	  </ion-item>
+      
+    <p>
+      {{SubCategory.description}}
+    </p>
+  </ion-card-content>
+</ion-card>
+<ion-list *ngIf="Category!=null">
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="https://www.sevamitraa.com/{{Category.icon}}"/>
+    </ion-avatar>
+    <h2>{{Category.title}}</h2>
+    <p>{{Category.description}}</p>
+  </ion-item>
+</ion-list>
+<button ion-button (click)="Book();" full color='primary'>Book</button>
+<ion-list *ngIf="ReviewsAvailable!=0">
+	<ion-item>
+		<h2>Customer Reviews</h2>
+	</ion-item>
+	<ion-item>
+		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>0"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>1"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>2"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>3"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>4"></ion-icon>
+		(Average {{AverageRating}} out of {{ReviewsAvailable}} reviews)
+	</ion-item>
+</ion-list>
+<ion-list *ngFor="let Review of Reviews">
+	<ion-item>
+		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>0"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>1"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>2"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>3"></ion-icon>
+		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>4"></ion-icon><br/>
+		<b>{{Review.name}}</b>
+		<p [innerHTML]="Review.feedback"></p>
+	</ion-item>
+</ion-list>
+</ion-content>

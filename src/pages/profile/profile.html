@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color='dark'>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item class="ProfileItem">
+			<ion-label floating>Name</ion-label>
+			<ion-input type="text" [(ngModel)]="FullName" (change)="EnableUpdate();" ></ion-input>
+		</ion-item>
+		
+		<ion-item class="ProfileItem">
+			<ion-label floating>Email ID</ion-label>
+			<ion-input type="text" [(ngModel)]="EmailID" (change)="EnableUpdate();" ></ion-input>
+		</ion-item>
+		
+		<ion-item class="ProfileItem">
+			<ion-label floating>Mobile No</ion-label>
+			<ion-input type="text" [(ngModel)]="MobileNo" (change)="EnableUpdate();" ></ion-input>
+		</ion-item>
+		<ion-item class="ProfileItem" *ngIf="isUpdate">
+			<button ion-button full color='primary' (click)="Update();">Update</button>
+		</ion-item>
+		<ion-item class="ProfileItem">
+			<button ion-button full color='primary' (click)="Logout();">Logout</button>
+		</ion-item>
+	</ion-list>
+</ion-content>

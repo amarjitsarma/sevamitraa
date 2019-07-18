@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>Sub Categories</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-card *ngFor="let SubCategory of SubCategories" (click)="Book(SubCategory.id,SubCategory.category_id);">
+		<ion-item class="CtaegoryBack">
+			<ion-avatar item-end>
+				<img src="https://www.sevamitraa.com/{{SubCategory.icon}}"/>
+			</ion-avatar>
+			<h2>{{SubCategory.title}}</h2>
+			<p>{{SubCategory.description}}</p>
+		</ion-item>
+	</ion-card>
+</ion-content>
