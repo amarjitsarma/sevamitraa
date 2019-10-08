@@ -111,7 +111,7 @@ ion-slide ion-item h2{
 }
 /*Card Background*/
 .card-background-page {
-
+	margin:-1px;
   ion-card {
     position: relative;
     text-align: center;
@@ -138,5 +138,5 @@ ion-slide ion-item h2{
 	color: #fff;
 	font-size: 1.5em;
   }
-
+  
 }

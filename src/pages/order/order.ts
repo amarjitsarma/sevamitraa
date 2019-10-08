@@ -140,13 +140,14 @@ export class OrderPage {
   }
   PayBill()
   {
+	  var scope=this;
 	  let OnlinePayable:any=parseInt(this.Bill.total);
 		let WalletPayment:any=0;
 		if(this.UseWallet==true)
 		{
-			if(this.WalletBalance>=0)
+			if(parseInt(this.WalletBalance)>=0)
 			{
-				if(parseFloat(this.WalletBalance)<=parseFloat(this.Bill.total))
+				if(parseInt(this.WalletBalance)<=parseInt(this.Bill.total))
 				{
 					OnlinePayable=parseInt(this.Bill.total)-parseInt(this.WalletBalance);
 					WalletPayment=parseInt(this.WalletBalance);
@@ -173,12 +174,10 @@ export class OrderPage {
 			}
 
 			var successCallback = function(success) {
-				var orderId = success.razorpay_order_id;
-				var signature = success.razorpay_signature;
-				this.MarkPaid();
-				if(WalletPayment>0)
+				scope.MarkPaid();
+				if(parseInt(WalletPayment)>0)
 				{
-					this.MakeWalletPayment(WalletPayment);
+					scope.MakeWalletPayment(WalletPayment);
 				}
 				
 			}
@@ -209,6 +208,7 @@ export class OrderPage {
 				ids:[bill_id]
 			})
 			.subscribe(data => {
+				this.ShowAlert("Success","This bill is now paid");
 				this.LoadOrder();
 				loading.dismiss();
 			},
@@ -267,9 +267,13 @@ export class OrderPage {
 			})
 		});
 	}
-	ViewBill(id)
+	ViewNonGSTBill(id)
 	{
-		this.navCtrl.push(BillPage, { BillID: id });
+		window.open("https://sevamitraa.com/api/make-pdf/"+id);
+	}
+	ViewGSTBill(id)
+	{
+		window.open("http://control.sevamitraa.com/"+this.Bill.bill);
 	}
 
 }

@@ -9,6 +9,7 @@ import { Device } from '@ionic-native/device';
 import { LandingPage } from './../landing/landing';
 import { TutorialPage } from './../tutorial/tutorial';
 import { LoginotpPage } from './../loginotp/loginotp';
+import { TabsPage } from './../tabs/tabs';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -26,6 +27,7 @@ export class LoginPage {
 	MobileNo:any="";
 	DeviceID:any="";
 	error="";
+	login:boolean=true;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public toastCtrl: ToastController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public device: Device, public platform: Platform, private fb: Facebook, public nav:Nav, public googlePlus: GooglePlus) {
 	  this.CheckLogin();
   }
@@ -69,19 +71,17 @@ export class LoginPage {
 		{
 			this.DeviceID="534b8b5aeb906015";
 		}
-
-			this.httpClient.get<any>('https://www.sevamitraa.com/api/checklogin/'+this.DeviceID)
-			.subscribe(data => {
-				if(data.loggedin!="no")
-				{
-					//window.location.reload()
-					this.nav.setRoot(TutorialPage);
-				}
-			},
-			err => {
-				location.reload();
-				//this.ShowAlert("Error", "Poor internet Connection");
-			})
+		this.httpClient.get<any>('https://www.sevamitraa.com/api/checklogin/'+this.DeviceID)
+		.subscribe(data => {
+			if(data.loggedin!="no")
+			{
+				//window.location.reload()
+				this.nav.setRoot(TabsPage);
+			}
+		},
+		err => {
+			//this.ShowAlert("Error", "Poor internet Connection");
+		})
 
 	}
 	FBLogin()
@@ -94,7 +94,8 @@ export class LoginPage {
 				{
 					this.DeviceID="534b8b5aeb906015";
 				}
-
+				if(profile.email!=undefined && profile.email!="" && profile.email!=null)
+				{
 					this.httpClient.get<any>('https://www.sevamitraa.com/api/FBLogin?email='+profile.email+"&name="+profile.name+"&device_id="+this.DeviceID)
 					.subscribe(data => {
 						location.reload();
@@ -103,7 +104,11 @@ export class LoginPage {
 						this.error=JSON.stringify(err);
 						location.reload();
 					})
-
+				}
+				else
+				{
+					this.ShowAlert("Error","Your facebook account doesn't have an email id");
+				}
 			}).catch(e => {
         this.error=JSON.stringify(e);
     });

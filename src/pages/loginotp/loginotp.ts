@@ -24,6 +24,7 @@ export class LoginotpPage {
 	MobileNo:any;
 	DeviceID:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public toastCtrl: ToastController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public device: Device, public platform: Platform, public nav:Nav){
+	  this.MobileNo=this.navParams.get('MobileNo');
   }
 
   ionViewDidLoad() {

@@ -7,20 +7,20 @@
 
 <ion-content>
 	<ion-list *ngIf="login=='yes'">
-		<ion-item>
+		<ion-item no-lines>
 			Unpaid Balance: {{Balance}}/- INR
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			Wallet Balance: {{WalletBalance}}/- INR
 		</ion-item>
-		<ion-item *ngIf="Balance!=0">
+		<ion-item no-lines *ngIf="Balance!=0">
 			<ion-label>Use Wallet Balance</ion-label>
 			<ion-checkbox color="dark" checked="true" [(ngModel)]="UseWallet" ></ion-checkbox>
 		</ion-item>
-		<ion-item *ngIf="Balance!=0">
+		<ion-item no-lines *ngIf="Balance!=0">
 			<button ion-button full (click)="PayAll()">Pay Now</button>
 		</ion-item>
-		<ion-item *ngFor="let Order of Orders">
+		<ion-item no-lines *ngFor="let Order of Orders">
 			<ion-title><h2>Order#{{Order.order_number}}</h2></ion-title>
 			<p>Booking Date: {{Order.booking_date}}</p>
 			<p>Order Date: {{Order.order_date}}({{Order.order_time}})</p>

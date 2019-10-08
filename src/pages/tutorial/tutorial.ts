@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, Slides, Platform } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { TabsPage } from './../tabs/tabs';
+import { LoginPage } from './../login/login';
 import { Device } from '@ionic-native/device';
 /**
  * Generated class for the TutorialPage page.
@@ -41,7 +42,7 @@ export class TutorialPage {
   }
 	GoToMain()
 	{
-		this.navCtrl.setRoot(TabsPage);
+		this.CheckLogin();//this.navCtrl.setRoot(TabsPage);
 	}
 	LoadNotification()
 	{
@@ -76,5 +77,29 @@ export class TutorialPage {
 		},
 		err => {
 		});
+	}
+	CheckLogin()
+	{
+		this.DeviceID=this.device.uuid;
+		if(this.DeviceID==null)
+		{
+			this.DeviceID="534b8b5aeb906015";
+		}
+		this.httpClient.get<any>('https://www.sevamitraa.com/api/checklogin/'+this.DeviceID)
+		.subscribe(data => {
+			if(data.loggedin!="no")
+			{
+				//window.location.reload()
+				this.navCtrl.setRoot(TabsPage);
+			}
+			else
+			{
+				this.navCtrl.setRoot(LoginPage);
+			}
+		},
+		err => {
+			location.reload();
+		})
+
 	}
 }

@@ -66,10 +66,10 @@ export class ProfilePage {
 				})
 				.subscribe(data => {
 					this.showPrompt();
-					loading.dismiss();
+					
 				},
 				err => {
-					loading.dismiss();
+					
 					//this.ShowAlert("Error", "Poor internet Connection");
 				})
 
@@ -134,10 +134,10 @@ export class ProfilePage {
 						this.ShowAlert("Success","Profile Updated");
 						this.UpdateProfile();
 					}
-					loading.dismiss();
+					
 				},
 				err => {
-					loading.dismiss();
+					
 					//this.ShowAlert("Error", "Poor internet Connection");
 				})
 
@@ -159,10 +159,10 @@ export class ProfilePage {
 			.subscribe(data => {
 				this.ShowAlert('Success','Profile Updated');
 				this.isUpdate=false;
-				loading.dismiss();
+				
 			},
 			err => {
-				loading.dismiss();
+				
 				//this.ShowAlert("Error", "Poor internet Connection");
 			})
 

@@ -43,7 +43,7 @@
 			</ion-grid>
 			<div *ngIf="Window.window_type=='Service'" >
 				<ion-list>
-					<ion-item *ngFor="let Service of OnlyDisplayService(Window.Services,windowindex); let i=index; trackBy: customTrackBy">
+					<ion-item no-lines *ngFor="let Service of OnlyDisplayService(Window.Services,windowindex); let i=index; trackBy: customTrackBy">
 						<ion-label><b>{{Service.title}} <span *ngIf="Service.price!=0">@ {{Service.price}} INR</span></b>
 						</ion-label>
 						
@@ -55,7 +55,7 @@
 			</div>
 			<div *ngIf="Window.window_type.indexOf('Optional')!=-1" >
 				<ion-list radio-group [(ngModel)]="WindowsValue[windowindex].OptionalValue">
-					<ion-item *ngFor="let option of GetOptions(Window.options); let i=index; trackBy: customTrackBy">
+					<ion-item no-lines *ngFor="let option of GetOptions(Window.options); let i=index; trackBy: customTrackBy">
 						<ion-label>{{option}}</ion-label>
 						<ion-radio [value]="option" (click)="Show(option,windowindex);" ></ion-radio>
 					</ion-item>
@@ -63,7 +63,7 @@
 			</div>
 			<div *ngIf="Window.window_type=='Option'" >
 				<ion-list radio-group [(ngModel)]="WindowsValue[windowindex].OptionValue">
-					<ion-item *ngFor="let option of OnlyDisplayOption(Window.Options); let i=index;">
+					<ion-item no-lines *ngFor="let option of OnlyDisplayOption(Window.Options); let i=index;">
 						<ion-label *ngIf="option.Display==1">{{option.option}}</ion-label>
 						<ion-radio *ngIf="option.Display==1" [value]="i" (click)="SearchServices(windowindex,option.Index);" ></ion-radio>
 					</ion-item>
@@ -89,7 +89,7 @@
 		</ion-slide>
 		<ion-slide *ngIf="Amount!=0">
 			<ion-list>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-grid>
 						<ion-row *ngFor="let oi of OrderItems; let i=index">
 							<ion-col col-6>{{oi.Item}}</ion-col>
@@ -114,17 +114,20 @@
 		</ion-slide>
 		<ion-slide>
 			<ion-list>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label>Date</ion-label>
 					<ion-select [(ngModel)]="Date">
 					<ion-option value="{{date}}" *ngFor="let date of dates">{{date}}</ion-option>
 					</ion-select>
 				</ion-item>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label>Time</ion-label>
 					<ion-select [(ngModel)]="Time">
 					<ion-option value="{{time}}" *ngFor="let time of TimeByDate(times)">{{time}}</ion-option>
 					</ion-select>
+				</ion-item>
+				<ion-item no-lines *ngIf="TimeByDate(times).length==0 && Date!=''">
+					Booking is unavailable for this date. Try another date.
 				</ion-item>
 			</ion-list>
 			<button ion-button large clear color="primary" (click)="GoPrevious(1000);">
@@ -138,7 +141,7 @@
 		</ion-slide>
 		<ion-slide>
 			<ion-list radio-group [(ngModel)]="SelectAddress" *ngIf="NewAddress==0">
-				<ion-item *ngFor="let Address of Addresses; let i=index">
+				<ion-item no-lines *ngFor="let Address of Addresses; let i=index">
 					<ion-radio [value]="i" (click)="FOF(i);" ></ion-radio>
 					<ion-label><p>{{Address.address}}</p>
 					<p *ngIf="Address.house_flat!=0">House No: {{Address.house_flat}}</p>
@@ -150,33 +153,33 @@
 			<ion-list *ngIf="NewAddress==1">
 				<button ion-button color="primary" (click)="BookPrevious();" *ngIf="Addresses.length>1">Book At Previous Address</button>
 				<button ion-button color="primary" (click)="GetMyLocation();">Book At My Location</button>
-				<ion-item>
+				<ion-item no-lines>
 					<div style='width:100%; text-align:center'>Or</div>
 				</ion-item>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label floating>House/Flat No</ion-label>
 					<ion-input type="text" [(ngModel)]="house_flat" ></ion-input>
 				</ion-item>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label floating>Location</ion-label>
 					<ion-input type="text" [(ngModel)]="location1"></ion-input>
 				</ion-item>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label floating>Land Mark</ion-label>
 					<ion-input type="text" [(ngModel)]="landmark"></ion-input>
 				</ion-item>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label floating>Pin Code</ion-label>
 					<ion-input type="text" [(ngModel)]="pincode"></ion-input>
 				</ion-item>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label floating>Address Type</ion-label>
 					<ion-select [(ngModel)]="type">
 							<ion-option value="Office" selected>Office</ion-option>
 							<ion-option value="Home">Home</ion-option>
 					</ion-select>
 				</ion-item>
-				<ion-item>
+				<ion-item no-lines>
 					<div id="map" #map></div>
 					<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
 						<agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
@@ -186,7 +189,7 @@
 				
 			</ion-list>
 			<ion-list>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label>Coupon</ion-label>
 					<ion-select [(ngModel)]="Coupon">
 						<ion-option value="" selected>No Coupons</ion-option>
@@ -195,7 +198,7 @@
 				</ion-item>
 			</ion-list>
 			<ion-list>
-				<ion-item>
+				<ion-item no-lines>
 					<ion-label>Payment Method</ion-label>
 					<ion-select [(ngModel)]="PaymentMethod">
 						<ion-option value="cod" selected>Pay On Delivery</ion-option>

@@ -41,7 +41,7 @@ export class MyApp {
         });
         alert.present();
     }
-  rootPage: any = LoginPage;
+  rootPage: any = TutorialPage;
 	FullName="";
 	EmailID="";
 	MobileNo="";

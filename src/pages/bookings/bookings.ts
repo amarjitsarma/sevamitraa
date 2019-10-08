@@ -71,7 +71,7 @@ export class BookingsPage {
 				this.Balance=0;
 				for(var i=0;i<data.length;i++)
 				{
-					this.Balance=this.Balance+parseFloat(data[i].total).toFixed(2);
+					this.Balance=parseFloat(this.Balance)+parseFloat(data[i].total);
 					this.BillIDs.push(data[i].id);
 				}
 				this.Balance=parseFloat(this.Balance).toFixed(2);
@@ -110,13 +110,14 @@ export class BookingsPage {
 	}
 	PayAll()
 	{
+		var scope=this;
 		let OnlinePayable:any=parseInt(this.Balance);
 		let WalletPayment:any=0;
 		if(this.UseWallet==true)
 		{
-			if(this.WalletBalance>=0)
+			if(parseInt(this.WalletBalance)>=0)
 			{
-				if(this.WalletBalance<this.Balance)
+				if(parseInt(this.WalletBalance)<parseInt(this.Balance))
 				{
 					OnlinePayable=parseInt(this.Balance)-parseInt(this.WalletBalance);
 					WalletPayment=parseInt(this.WalletBalance);
@@ -143,12 +144,18 @@ export class BookingsPage {
 				}
 			}
 			var successCallback = function(success) {
-				this.MarkPaid();
-				var orderId = success.razorpay_order_id;
-				var signature = success.razorpay_signature;
-				if(WalletPayment>0)
+				
+				try
 				{
-					this.MakeWalletPayment(WalletPayment);
+					scope.MarkPaid();
+					if(parseInt(WalletPayment)>0)
+					{
+						scope.MakeWalletPayment(WalletPayment);
+					}
+				}
+				catch(ex)
+				{
+					console.log(ex);
 				}
 			}
 	
@@ -162,7 +169,7 @@ export class BookingsPage {
 		}
 		else
 		{
-			if(WalletPayment>0)
+			if(parseInt(WalletPayment)>0)
 			{
 				this.MakeWalletPayment(WalletPayment);
 			}
@@ -176,8 +183,10 @@ export class BookingsPage {
 				ids:this.BillIDs
 			})
 			.subscribe(data => {
+				this.ShowAlert("Success","All your pending bills are paid");
 				this.LoadOrders();
 				this.GetBills();
+				this.GetWallet();
 			},
 			err => {
 				console.log(err);

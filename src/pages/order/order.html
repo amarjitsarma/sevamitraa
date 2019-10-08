@@ -15,13 +15,13 @@
 
 <ion-content padding>
 	<ion-list>
-		<ion-item>
+		<ion-item no-lines>
 			<h2>Order #{{order_number}}</h2>
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			Booking Date: {{booking_date}}
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			<ion-grid>
 				<ion-row>
 					<ion-col col-2>SL</ion-col>
@@ -35,66 +35,67 @@
 				</ion-row>
 			</ion-grid>
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			Service Date: {{order_date}}
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			Time: {{order_time}}
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			<h2>Address:</h2>{{address}}
 		</ion-item>
-		<ion-item *ngIf="amount!=0">
+		<ion-item no-lines *ngIf="amount!=0">
 			Amount: {{amount}}
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			Payment Method: {{payment_type}}
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			Status: {{status}}<br/>
 			{{remarks}}
 		</ion-item>
-		<ion-item *ngIf="status=='Pending'">
+		<ion-item no-lines *ngIf="status=='Pending'">
 			<button ion-button color="dark" (click)="CalcelOrder();" full >Cancel Order</button>
 		</ion-item>
 		
-		<ion-item *ngIf="Bill!=null">
+		<ion-item no-lines *ngIf="Bill!=null">
 			Bill Amount: {{Bill.total}}/- INR<br/>
 		</ion-item>
-		<ion-item *ngIf="Bill!=null">
+		<ion-item no-lines *ngIf="Bill!=null">
 			<ion-label>Use Wallet Balance({{WalletBalance}})</ion-label>
 			<ion-checkbox color="dark" checked="true" [(ngModel)]="UseWallet" *ngIf="Bill.status==0" ></ion-checkbox>
 		</ion-item>
-		<ion-item *ngIf="Bill!=null">
+		<ion-item no-lines *ngIf="Bill!=null">
 			<button ion-button full (click)="PayBill()" *ngIf="Bill.status==0">Pay Now</button>
-			<button ion-button full (click)="ViewBill(Bill.id)">View Bill</button>
+			<button ion-button full (click)="ViewNonGSTBill(Bill.id)">View Receipt</button>
+			<button ion-button full (click)="ViewGSTBill(Bill.id)" *ngIf="Bill.bill!=null && Bill.bill!=''">View Bill</button>
 		</ion-item>
 	</ion-list>
 	<h3>Your feedback</h3>
 	<ion-list *ngIf="feedbackGiven==0">
-		<ion-item>
+		<ion-item no-lines>
 			<ion-range min="1" max="5" step="1" snaps="true" [(ngModel)]="star" color="energized">
 				<ion-icon range-left small color="danger" name="star"></ion-icon>
 				<ion-icon range-right color="danger" name="star"></ion-icon>
 			</ion-range>
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			<ion-label>Feedback</ion-label>
 			<ion-textarea [(ngModel)]="feedback"></ion-textarea>
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			<button ion-button color="dark" (click)="SaveFeedback();" full >Submit</button>
 		</ion-item>
 	</ion-list>
 	<ion-list *ngIf="feedbackGiven==1">
-		<ion-item>
+		<ion-item no-lines>
 			<ion-icon range-right color="danger" name="star" *ngIf="feedback[0].rating>0"></ion-icon>
 			<ion-icon range-right color="danger" name="star" *ngIf="feedback[0].rating>1"></ion-icon>
 			<ion-icon range-right color="danger" name="star" *ngIf="feedback[0].rating>2"></ion-icon>
 			<ion-icon range-right color="danger" name="star" *ngIf="feedback[0].rating>3"></ion-icon>
 			<ion-icon range-right color="danger" name="star" *ngIf="feedback[0].rating>4"></ion-icon>
 		</ion-item>
-		<ion-item>
+		<ion-item no-lines>
 			<p [innerHTML]="feedback[0].feedback"></p>
 		</ion-item>
 	</ion-list>

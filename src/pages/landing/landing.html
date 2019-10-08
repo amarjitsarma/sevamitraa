@@ -1,28 +1,31 @@
 
 <ion-content>
-	<ion-list>
-		<ion-item text-center>
+	<ion-list style="background:#000; margin-top:-9px;">
+		<ion-item text-center no-lines style="background:#000; color:#fff;">
 			<ion-icon name="pin"></ion-icon> Guwahati
 		</ion-item>
+		<ion-item no-lines style="background:#000; margin-top:-25px;">
+			<ion-searchbar (click)="GotoSearch();" style="padding:0px;"></ion-searchbar>
+		</ion-item>
 	</ion-list>
-	<ion-searchbar (click)="GotoSearch();"></ion-searchbar>
+	
 	<ion-list>
-		<ion-item *ngFor="let item of items; let i=index" (click)="Book(item);" class="searchItem">
+		<ion-item no-lines *ngFor="let item of items; let i=index" (click)="Book(item);" class="searchItem">
 			{{ item }}
 		</ion-item>
 		
 	</ion-list>
 	<h2 text-center *ngIf="Coupons.length!=0">Latest  Coupon & Offer</h2>
-	<ion-list *ngIf="Coupons.length!=0">
-		<ion-item *ngFor="let Coupon of Coupons" class="card-background-page">
+	<ion-slides *ngIf="Coupons.length!=0" slidesPerView="1" pager="true" paginationType="progress" loop="true" effect="coverflow">
+		<ion-slide *ngFor="let Coupon of Coupons">
 			<ion-card (click)="GetProducts(Coupon.id);">
 				<img src="https://www.sevamitraa.com/{{Coupon.image}}"/>
 			</ion-card>
-		</ion-item>
-	</ion-list>
+		</ion-slide>
+	</ion-slides>
 	<div style="margin-bottom:10px;">
 	<ion-card *ngFor="let Category of SubCategories" (click)="BookSub(Category.id,Category.category_id);" class="Half-Card">
-		<ion-item class="CtaegoryBack">
+		<ion-item no-lines class="CtaegoryBack">
 			<img src="https://www.sevamitraa.com/{{Category.icon}}"/>
 			<h2>{{Category.title}}</h2>
 		</ion-item>
@@ -35,8 +38,8 @@
 		<ion-icon name="arrow-round-up"></ion-icon>
 	</button>
 	</div>
-	<ion-list *ngIf="Promotions.length!=0">
-		<ion-item *ngFor="let Promotion of Promotions" class="card-background-page">
+	<ion-list *ngIf="Promotions.length!=0" class="subcategory-list">
+		<ion-item no-lines *ngFor="let Promotion of Promotions" class="card-background-page">
 			<ion-card (click)="BookSub(Promotion.sub_category_id,Promotion.category_id);" >
 				<img src="https://www.sevamitraa.com/{{Promotion.promotional_image}}"/>
 				<!--div class="card-title">São Paulo</div-->
@@ -56,7 +59,7 @@
 		</ion-slide>
 	</ion-slides-->
 	<ion-card *ngFor="let Category of Categories" (click)="Book(Category.id);">
-		<ion-item class="CtaegoryBack">
+		<ion-item no-lines class="CtaegoryBack">
 			<ion-avatar item-end>
 				<img src="https://www.sevamitraa.com/{{Category.icon}}"/>
 			</ion-avatar>

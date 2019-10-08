@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionic.sevamitraa" version="0.0.58" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionic.sevamitraa" version="0.0.70" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Sevamitraa</name>
     <description>Sevamitraa</description>
     <author email="info@24techsoft.com" href="http://24techsoft.com/">24 Tech Soft</author>

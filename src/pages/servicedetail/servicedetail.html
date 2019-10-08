@@ -22,7 +22,7 @@
 </ion-slides>
 	<ion-card *ngIf="SubCategory!=null">
 		<img src="https://www.sevamitraa.com/{{SubCategory.image}}" *ngIf="SubCategory.image!=''"/>
-  <ion-card-content>
+  <!--ion-card-content>
     
 		<ion-item>
 		<ion-avatar item-start>
@@ -36,9 +36,10 @@
     <p>
       {{SubCategory.description}}
     </p>
-  </ion-card-content>
+  </ion-card-content-->
+  
 </ion-card>
-<ion-list *ngIf="Category!=null">
+<!--ion-list *ngIf="Category!=null">
   <ion-item>
     <ion-avatar item-start>
       <img src="https://www.sevamitraa.com/{{Category.icon}}"/>
@@ -46,13 +47,18 @@
     <h2>{{Category.title}}</h2>
     <p>{{Category.description}}</p>
   </ion-item>
+</ion-list-->
+<ion-list *ngIf="Category!=null">
+  <ion-item no-lines *ngIf="SubCategory!=null" no-lines>
+    <h2>{{Category.title}}&nbsp;->&nbsp;{{SubCategory.title}}</h2>
+  </ion-item>
 </ion-list>
 <button ion-button (click)="Book();" full color='primary'>Book</button>
 <ion-list *ngIf="ReviewsAvailable!=0">
-	<ion-item>
+	<ion-item no-lines>
 		<h2>Customer Reviews</h2>
 	</ion-item>
-	<ion-item>
+	<ion-item no-lines>
 		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>0"></ion-icon>
 		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>1"></ion-icon>
 		<ion-icon range-right color="danger" name="star" *ngIf="AverageRating>2"></ion-icon>
@@ -62,7 +68,7 @@
 	</ion-item>
 </ion-list>
 <ion-list *ngFor="let Review of Reviews">
-	<ion-item>
+	<ion-item no-lines>
 		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>0"></ion-icon>
 		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>1"></ion-icon>
 		<ion-icon range-right color="danger" name="star" *ngIf="Review.rating>2"></ion-icon>

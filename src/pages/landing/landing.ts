@@ -8,10 +8,11 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { TutorialPage } from './../tutorial/tutorial';
 import { SubcategoryPage } from './../subcategory/subcategory';
 import { BookPage } from './../book/book';
+import { BookingsPage } from '../bookings/bookings';
 import { SearchPage } from './../search/search';
 import { ServicedetailPage } from './../servicedetail/servicedetail';
 import { TestimonialPage } from './../testimonial/testimonial';
-
+import { Device } from '@ionic-native/device';
 
 @IonicPage()
 @Component({
@@ -40,6 +41,7 @@ export class LandingPage {
 		this.showall=sts;
 		this.LoadSubcategories();
 	}
+	DeviceID:string="";
 	TestPost()
   {
 	  this.httpClient.post<any>("http://blist.ptezone.com.au/api.php",{ID:15})
@@ -79,7 +81,7 @@ export class LandingPage {
 		}
 	}
   }
-  constructor(public platform:Platform, public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public nativeStorage: NativeStorage, public toastCtrl: ToastController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public diagnostic:Diagnostic) {
+  constructor(public platform:Platform, public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public nativeStorage: NativeStorage, public toastCtrl: ToastController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public diagnostic:Diagnostic, public device: Device) {
 		this.LoadCategories();
 		this.LoadCoupons();
 		this.LoadSubcategories();
@@ -87,6 +89,52 @@ export class LandingPage {
 		this.LoadTestimonials();
 		this.LoadPromotions();
 		this.TestPost();
+		this.CheckBalance();
+  }
+  Balance:any=0;
+  CheckBalance()
+  {
+		var scope=this;
+		this.DeviceID=this.device.uuid;
+		if(this.DeviceID==null)
+		{
+			this.DeviceID="534b8b5aeb906015";
+		}
+
+		this.httpClient.post<any>('https://www.sevamitraa.com/api/get_unpaid_bills',{device_id:this.DeviceID})
+		.subscribe(data => {
+			this.Balance=0;
+			for(var i=0;i<data.length;i++)
+			{
+				this.Balance=parseFloat(this.Balance)+parseFloat(data[i].total);
+			}
+			this.Balance=parseFloat(this.Balance).toFixed(2);
+			if(parseInt(this.Balance)>0)
+			{
+				const confirm = scope.alertCtrl.create({
+					title: 'Pending bills!',
+					message: 'Dear customer, you have '+scope.Balance+' /- INR unpaid balance.' ,
+					buttons: [
+						{
+							text: 'Cancel',
+							handler: () => {
+								console.log('Disagree clicked');
+							}
+						},
+						{
+							text: 'Proceed to Pay',
+							handler: () => {
+								scope.navCtrl.push(BookingsPage);
+							}
+						}
+					]
+				});
+			confirm.present();
+			}
+		},
+		err => {
+			//this.ShowAlert("Error", "Poor internet Connection");
+		})
   }
   LoadTestimonials()
   {

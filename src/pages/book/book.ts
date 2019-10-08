@@ -76,6 +76,7 @@ export class BookPage {
 	@ViewChild("search")
 	public searchElementRef;
 	error:string="";
+	holidays:any=[];
 	//Angular map
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public toastCtrl: ToastController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public geolocation: Geolocation, public googlemap: GoogleMaps, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, public nativeGeocoder: NativeGeocoder, public modalCtrl : ModalController, public device: Device, public diagnostic:Diagnostic, private payPal: PayPal) {
 	  this.LoadWindows();
@@ -85,11 +86,21 @@ export class BookPage {
 	  this.Date="";
 	  this.Time="";
 	  this.LoadAddresses();
+	  this.LoadHolidays();
 	  
   }
 	doSubmit(event) {
 		//console.log('Submitting form', this.typeForm.value);
 		event.preventDefault();
+  }
+  LoadHolidays()
+  {
+	  this.httpClient.post<any>('https://www.sevamitraa.com/api/get_holidays',{sub_category:this.navParams.get('SubCategory')})
+		.subscribe(data => {
+			this.holidays=data;
+		},
+		err => {
+		})
   }
   LoadCoupons()
   {
@@ -878,6 +889,7 @@ export class BookPage {
 			})
 		});
 	}
+	OffTime:any="";
 	TimeByDate(mytimes)
 	{
 		var showTimes=[];
@@ -889,9 +901,61 @@ export class BookPage {
 			FormatDate="0"+FormatDate;
 		}
 		var FormatTime=Today.getHours();
+		console.log(JSON.stringify(this.holidays).search(this.Date));
 		if(this.Date=="")
 		{
 			return showTimes;
+		}
+		else if(JSON.stringify(this.holidays).search(this.Date)!=-1)
+		{
+			for(var ih=0;ih<this.holidays.length;ih++)
+			{
+				if(this.holidays[ih].mydate==this.Date)
+				{
+					if(this.holidays[ih].time_slot=="" || this.holidays[ih].time_slot=="All")
+					{
+						return showTimes;
+					}
+					else
+					{
+						this.OffTime=this.holidays[ih].time_slot;
+						var i=0;
+						if(FormatTime<9 && FormatDate==this.Date)
+						{
+							i=0;
+						}
+						else if((FormatTime==9 || FormatTime==10) && FormatDate==this.Date)
+						{
+							i=1;
+						}
+						else if((FormatTime==11 || FormatTime==12) && FormatDate==this.Date)
+						{
+							i=2;
+						}
+						else if((FormatTime==13 || FormatTime==14) && FormatDate==this.Date)
+						{
+							i=3;
+						}
+						else if((FormatTime==15 || FormatTime==16) && FormatDate==this.Date)
+						{
+							i=4;
+						}
+						for(var j=i;j<mytimes.length;j++)
+						{
+							if(mytimes[j]!=this.OffTime)
+							{
+								showTimes.push(mytimes[j]);
+							}
+						}
+						console.log(showTimes);
+						if(showTimes.length==0)
+						{
+							this.Time="";
+						}
+						return showTimes;
+					}
+				}
+			}
 		}
 		else
 		{
@@ -902,41 +966,21 @@ export class BookPage {
 				{
 					return mytimes;
 				}
-				else if(FormatTime==9)
+				else if(FormatTime==9 || FormatTime==10)
 				{
 					i=1;
 				}
-				else if(FormatTime==10)
+				else if(FormatTime==11 || FormatTime==12)
 				{
 					i=2;
 				}
-				else if(FormatTime==11)
+				else if(FormatTime==13 || FormatTime==14)
 				{
 					i=3;
 				}
-				else if(FormatTime==12)
+				else if(FormatTime==15 || FormatTime==16)
 				{
 					i=4;
-				}
-				else if(FormatTime==13)
-				{
-					i=5;
-				}
-				else if(FormatTime==14)
-				{
-					i=6;
-				}
-				else if(FormatTime==15)
-				{
-					i=7;
-				}
-				else if(FormatTime==16)
-				{
-					i=8;
-				}
-				else if(FormatTime==17)
-				{
-					i=9;
 				}
 				else
 				{
